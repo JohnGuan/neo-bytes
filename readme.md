@@ -8,6 +8,7 @@ Useful for displaying file sizes for humans.
 [Read about the difference between kilobyte and kibibyte.](https://web.archive.org/web/20150324153922/https://pacoup.com/2009/05/26/kb-kb-kib-whats-up-with-that/)*
 
 > This project stands on the shoulders of the great **[pretty-bytes](https://github.com/sindresorhus/pretty-bytes) by [Sindre Sorhus](https://github.com/sindresorhus)**. 
+>
 > It is a fork of the original project with additional features.
 
 ## Install
@@ -40,13 +41,133 @@ neoBytes(1337, {locale: 'de'});
 //=> '1,34 kB'
 ```
 
-## Migrating from `pretty-bytes`
+### Migrating from `pretty-bytes`
+
+Currently, `neo-bytes` is fully compatible with `pretty-bytes`. 
+
+If you need the **additional features** of `neo-bytes`. 
+
+You can migrate to `neo-bytes` in the fastest way by doing the following:
 
 ```js
+// Before
 import prettyBytes from 'pretty-bytes';
-//                       vvv
+//                       ^^^^^^
+
+// After
 import prettyBytes from 'neo-bytes';
+//                       ^^^
+
+// Or fully use the new name (recommended)
+import neoBytes from 'neo-bytes';
+//     ^^^            ^^^
 ```
+
+## Choose the Right Unit
+
+`neo-bytes`, like the original `pretty-bytes`, only does basic **human-readable** conversion.
+
+But I found that in practice. It is really hard to understand how to choose units in different situations.
+
+Here are my suggestions based on a lot of study and practice.
+
+> If there is any disagreement, please raise an [issue](https://github.com/JohnGuan/neo-bytes/issues) and we can discuss about it.
+
+### Memory / CPU Cache Size
+
+#### Use `binary`
+
+```js
+// A custom function to make it easier
+const memorySize = (n) => neoBytes(n, {binary: true});
+
+// Example
+memorySize(67108864); // 64 * 1024 * 1024
+//=> '64 MiB'
+
+memorySize(68719476736); // 64 * 1024 * 1024 * 1024
+//=> '64 GiB'
+```
+
+#### Use `binary` and `noi`
+
+***Not recommended***, because it is not a standard unit. But it is still useful in some cases.
+
+If someone don't like the 'i' in the unit. You can use `noi` to remove it.
+
+```js
+// A custom function to make it easier
+const memorySize = (n) => neoBytes(n, {binary: true, noi: true});
+
+// Example
+memorySize(67108864); // 64 * 1024 * 1024
+//=> '64 MB'
+
+memorySize(68719476736); // 64 * 1024 * 1024 * 1024
+//=> '64 GB'
+```
+
+### Storage / Disk / File Size
+
+#### Use nothing (Decimal)
+
+```js
+// A custom function to make it easier
+const storageSize = (n) => neoBytes(n);
+
+// Example
+storageSize(128000000000); // 128 * 1000 * 1000 * 1000
+//=> '128 GB'
+```
+
+```js
+// A custom function to make it easier
+const diskSize = (n) => neoBytes(n);
+
+diskSize(16000000000000); // 16 * 1000 * 1000 * 1000 * 1000
+//=> '16 TB'
+```
+
+```js
+// A custom function to make it easier
+const fileSize = (n) => neoBytes(n);
+
+// Example
+fileSize(1233445);
+//=> '1.23 MB'
+```
+
+### Link Speed / Network Bandwidth
+
+#### Use `bits`, `noit` and `suffix`
+
+```js
+// A custom function to make it easier
+const linkSpeed = (n) => neoBytes(n, {bits: true, noit: true, suffix: 'ps'});
+
+// Example
+linkSpeed(1000000000); // 1 * 1000 * 1000 * 1000
+//=> '1 Gbps'
+```
+
+### Download Speed / File Transfer Speed
+
+#### Use `suffix`
+
+```js
+// A custom function to make it easier
+const downloadSpeed = (n) => neoBytes(n, {suffix: '/s'});
+
+// Example
+downloadSpeed(1000000); // 1 * 1000 * 1000
+//=> '1 MB/s'
+```
+
+### Reference
+- [Byte](https://en.wikipedia.org/wiki/Byte)
+- [Bit](https://en.wikipedia.org/wiki/Bit)
+- [Metric prefix](https://en.wikipedia.org/wiki/Metric_prefix)
+- [Binary Prefix](https://en.wikipedia.org/wiki/Binary_prefix)
 
 ## API
 
