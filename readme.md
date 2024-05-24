@@ -75,25 +75,10 @@ Here are my suggestions based on a lot of study and practice.
 
 ### Memory / CPU Cache Size
 
-#### Use `binary`
-
-```js
-// A custom function to make it easier
-const memorySize = (n) => neoBytes(n, {binary: true});
-
-// Example
-memorySize(67108864); // 64 * 1024 * 1024
-//=> '64 MiB'
-
-memorySize(68719476736); // 64 * 1024 * 1024 * 1024
-//=> '64 GiB'
-```
-
 #### Use `binary` and `noi`
 
-***Not recommended***, because it is not a standard unit. But it is still useful in some cases.
+Follow the [JEDEC memory standards](https://en.wikipedia.org/wiki/JEDEC_memory_standards), which is the most common standard for memory size.
 
-If someone don't like the 'i' in the unit. You can use `noi` to remove it.
 
 ```js
 // A custom function to make it easier
@@ -166,6 +151,7 @@ downloadSpeed(1000000); // 1 * 1000 * 1000
 ### Reference
 - [Byte](https://en.wikipedia.org/wiki/Byte)
 - [Bit](https://en.wikipedia.org/wiki/Bit)
+- [JEDEC memory standards](https://en.wikipedia.org/wiki/JEDEC_memory_standards)
 - [Metric prefix](https://en.wikipedia.org/wiki/Metric_prefix)
 - [Binary Prefix](https://en.wikipedia.org/wiki/Binary_prefix)
 
