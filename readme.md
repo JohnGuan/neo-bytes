@@ -75,9 +75,9 @@ Here are my suggestions based on a lot of study and practice.
 
 ### Memory / CPU Cache Size
 
-#### Use `binary` and `noi`
-
-Follow the [JEDEC memory standards](https://en.wikipedia.org/wiki/JEDEC_memory_standards), which is the most common standard for memory size.
+> **Use `binary` and `noi`**
+> 
+> Follow the [JEDEC memory standards](https://en.wikipedia.org/wiki/JEDEC_memory_standards), which is the most common standard for memory size.
 
 
 ```js
@@ -94,7 +94,7 @@ memorySize(68719476736); // 64 * 1024 * 1024 * 1024
 
 ### Storage / Disk / File Size
 
-#### Use nothing (Decimal)
+> **Use nothing**
 
 ```js
 // A custom function to make it easier
@@ -124,7 +124,7 @@ fileSize(1233445);
 
 ### Link Speed / Network Bandwidth
 
-#### Use `bits`, `noit` and `suffix`
+> **Use `bits`, `noit` and `suffix`**
 
 ```js
 // A custom function to make it easier
@@ -137,7 +137,7 @@ linkSpeed(1000000000); // 1 * 1000 * 1000 * 1000
 
 ### Download Speed / File Transfer Speed
 
-#### Use `suffix`
+> **Use `suffix`**
 
 ```js
 // A custom function to make it easier
